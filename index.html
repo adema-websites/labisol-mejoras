@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Labisol Mejoras / Labisol 改进</title>
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --bg-color: #f4f6f9;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --border-color: #e0e0e0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .app-container {
+            max-width: 600px;
+            margin: 0 auto;
+            min-height: 100vh;
+            background-color: var(--card-bg);
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        main {
+            padding: 20px;
+            flex: 1;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--bg-color);
+            padding-bottom: 10px;
+        }
+
+        .section-title h2 {
+            font-size: 1.1rem;
+            margin: 0;
+            color: var(--primary-color);
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+            margin-top: 10px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        th, td {
+            padding: 12px 10px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: var(--bg-color);
+            font-weight: 600;
+            color: #555;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background-color: #e6f4ea;
+            color: #1e7e34;
+        }
+
+        .link-icon {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.8rem;
+            color: #888;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Login Styles */
+        .login-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .login-wrapper h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            width: 100%;
+            max-width: 300px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        .error-msg {
+            color: #dc3545;
+            font-size: 0.85rem;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div id="login-view" class="login-wrapper">
+    <h2>Labisol Acceso / 登录</h2>
+    <div class="form-group">
+        <label>Usuario / 用户名</label>
+        <input type="text" id="username" placeholder="Usuario">
+    </div>
+    <div class="form-group">
+        <label>Contraseña / 密码</label>
+        <input type="password" id="password" placeholder="Contraseña">
+    </div>
+    <button class="btn" onclick="checkLogin()" style="max-width: 300px;">Entrar / 进入</button>
+    <p id="error-msg" class="error-msg">Credenciales incorrectas / 凭证错误</p>
+</div>
+
+<div id="main-content" class="app-container" style="display: none;">
+    <header>
+        <h1>Labisol Mejoras</h1>
+        <p>Labisol 改进跟踪</p>
+    </header>
+
+    <main>
+        <div class="card">
+            <div class="section-title">
+                <h2>Estado / 状态</h2>
+            </div>
+            <p><strong>Proyecto Activo / 项目活跃</strong></p>
+            <p style="color: #666; font-size: 0.9rem;">
+                Estamos trabajando en las mejoras del sistema. Aquí podrás ver el progreso diario.
+                <br>
+                我们正在改进系统。在这里您可以看到每日的进度。
+            </p>
+        </div>
+
+        <div class="section-title">
+            <h2>Mejoras Implementadas <br><span style="font-size: 0.8em; color: #666;">已实施的改进</span></h2>
+        </div>
+
+        <div class="card">
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Fecha / 日期</th>
+                            <th>Detalle / 详情</th>
+                            <th>Ver / 查看</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>001</td>
+                            <td>05/12/2025</td>
+                            <td>
+                                Resumen Inicial de Mejoras
+                                <br>
+                                <span style="color: #888; font-size: 0.8em;">初步改进总结</span>
+                            </td>
+                            <td>
+                                <a href="mejoras/001_resumen_5_12.html" class="link-icon">➜</a>
+                            </td>
+                        </tr>
+                        <!-- Future improvements will be added here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2025 Labisol
+    </footer>
+</div>
+
+<script>
+    function checkLogin() {
+        const user = document.getElementById('username').value;
+        const pass = document.getElementById('password').value;
+        const errorMsg = document.getElementById('error-msg');
+
+        if (user === 'TiendaLabisol2025' && pass === 'Nicolas321.!') {
+            // Success
+            document.getElementById('login-view').style.display = 'none';
+            document.getElementById('main-content').style.display = 'flex';
+            sessionStorage.setItem('labisol_auth', 'true');
+        } else {
+            // Error
+            errorMsg.style.display = 'block';
+        }
+    }
+
+    // Check if already logged in
+    if (sessionStorage.getItem('labisol_auth') === 'true') {
+        document.getElementById('login-view').style.display = 'none';
+        document.getElementById('main-content').style.display = 'flex';
+    }
+</script>
+
+</body>
+</html>
