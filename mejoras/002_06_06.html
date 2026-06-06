@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Corrección de Checkout Invitado / 访客结账功能修复</title>
+  <style>
+    body{
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans", sans-serif;
+      margin: 0;
+      background: #f7f7fb;
+      color: #111;
+    }
+    .wrap{
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 16px 40px;
+    }
+    .card{
+      background: #fff;
+      border: 1px solid #e8e8ef;
+      border-radius: 12px;
+      padding: 28px 26px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+    }
+    .topbar{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .lang-pill{
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #f0f2ff;
+      border: 1px solid #dfe3ff;
+      color: #2a2f6b;
+      white-space: nowrap;
+    }
+    button{
+      cursor: pointer;
+      border: 1px solid #d9d9e6;
+      background: #111;
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-weight: 600;
+      transition: transform .08s ease, opacity .08s ease;
+    }
+    button:hover{ opacity: .92; }
+    button:active{ transform: translateY(1px); }
+
+    h1{
+      font-size: 24px;
+      margin: 0 0 8px 0;
+      color: #111;
+    }
+    h3{
+      margin-top: 22px;
+      margin-bottom: 8px;
+      font-size: 18px;
+      color: #2a2f6b;
+    }
+    p{
+      line-height: 1.55;
+      margin: 8px 0;
+    }
+    .muted{
+      color: #555;
+      font-size: 14px;
+    }
+    .status-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      background-color: #e6f4ea;
+      color: #1e7e34;
+      margin-bottom: 15px;
+    }
+    hr{
+      border: 0;
+      border-top: 1px dashed #e6e6ef;
+      margin: 22px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="topbar">
+        <div class="lang-pill" id="lang-indicator">Idioma actual: Español</div>
+        <button id="toggle-lang" type="button" aria-pressed="false">
+          Cambiar a 中文
+        </button>
+      </div>
+
+      <div class="status-badge" data-i18n
+           data-lang-es="✓ Implementado y Productivo"
+           data-lang-zh="✓ 已 solid 部署并投入生产">
+        ✓ Implementado y Productivo
+      </div>
+
+      <h1 data-i18n
+          data-lang-es="Optimización Crítica: Estabilización del Cierre de Compra como Invitado"
+          data-lang-zh="关键优化：访客结账与自动开户流程修复">
+        Optimización Crítica: Estabilización del Cierre de Compra como Invitado
+      </h1>
+
+      <p class="muted" data-i18n
+         data-lang-es="Reporte técnico de estabilidad — ADEMA Sistemas"
+         data-lang-zh="系统稳定性技术报告 — ADEMA Sistemas">
+        Reporte técnico de estabilidad — ADEMA Sistemas
+      </p>
+
+      <hr />
+
+      <h3 data-i18n
+          data-lang-es="1. El Problema Detectado"
+          data-lang-zh="1. 发现的问题">
+        1. El Problema Detectado
+      </h3>
+
+      <p data-i18n
+         data-lang-es="Antes: Al monitorear las métricas internas de la plataforma, identificamos que cuando un cliente nuevo intentaba realizar una compra rápida bajo la modalidad de 'Invitado' (sin iniciar sesión previamente) y seleccionaba la opción de registrar su cuenta durante el cierre, el sistema experimentaba una caída interna (Error 500). Esto impedía que se completara el pedido, afectando directamente la tasa de conversión de ventas."
+         data-lang-zh="之前：在监控平台内部运行指标时，我们发现当新客户尝试以“访客”身份进行快速采购，并在结账过程中勾选“同时创建账户”时，系统由于底层变量解析异常会触发内部错误（Error 500）。这导致订单无法顺利提交，直接影响了商城的交易转化率。">
+        Antes: Al monitorear las métricas internas de la plataforma, identificamos que cuando un cliente nuevo intentaba realizar una compra rápida bajo la modalidad de 'Invitado' (sin iniciar sesión previamente) y seleccionaba la opción de registrar su cuenta durante el cierre, el sistema experimentavana una caída interna (Error 500). Esto impedía que se completara el pedido, afectando directamente la tasa de conversión de ventas.
+      </p>
+
+      <h3 data-i18n
+          data-lang-es="2. La Solución Aplicada"
+          data-lang-zh="2. 实施的解决方案">
+        2. La Solución Aplicada
+      </h3>
+
+      <p data-i18n
+         data-lang-es="Ahora: Reestructuramos y normalizamos la lógica del backend encargada de procesar las compras anónimas. Implementamos un generador seguro y automatizado de nombres de usuario comerciales basado de forma directa en el correo electrónico provisto por el comprador, garantizando la unicidad de cada registro mediante un sufijo dinámico. Además, robustecimos el código para interpretar de manera precisa cualquier tipo de datos proveniente de los formularios de la tienda."
+         data-lang-zh="现在：我们重构并规范 l 核心后端处理匿名采购的底层逻辑。当访客下单时，系统会自动根据客户填写的电子邮箱前缀安全生成唯一的商业用户名，并通过动态增量后缀确保数据绝不冲突。同时，强化了代码对前端表单各种类型负载数据的兼容性解析。">
+        Ahora: Reestructuramos y normalizamos la lógica del backend encargada de procesar las compras anónimas. Implementamos un generador seguro y automatizado de nombres de usuario comerciales basado de forma directa en el correo electrónico provisto por el comprador, garantizando la unicidad de cada registro mediante un sufijo dinámico. Además, robustecimos el código para interpretar de manera precisa cualquier tipo de datos proveniente de los formularios de la tienda.
+      </p>
+
+      <h3 data-i18n
+          data-lang-es="3. Pruebas de Seguridad y Rendimiento"
+          data-lang-zh="3. 安全与性能自动化测试验证">
+        3. Pruebas de Seguridad y Rendimiento
+      </h3>
+
+      <p data-i18n
+         data-lang-es="Para garantizar que esta corrección sea definitiva y no afecte ninguna otra funcionalidad activa de la plataforma Labisol, incorporamos un set de pruebas automatizadas de regresión. Estas validaciones simulan compras masivas concurrentes en el servidor y confirman que el checkout de invitados ahora responde con éxito (Código 200), procesando el pedido y la creación del perfil del cliente de forma fluida y en milisegundos."
+         data-lang-zh="为了确保此项修复长久稳定，且不影响 Labisol 平台的任何其他现有功能，我们编写并接入了全新的自动化回归测试集。这些验证在服务器端模拟了多并发的大宗采购行为，结果证实访客结账功能完全恢复正常（成功响应 Code 200），整个订单创建与用户建档流程在几毫秒内便可顺畅完成。">
+        Para garantizar que esta corrección sea definitiva y no afecte ninguna otra funcionalidad activa de la plataforma Labisol, incorporamos un set de pruebas automatizadas de regresión. Estas validaciones simulan compras masivas concurrentes en el servidor y confirman que el checkout de invitados ahora responde con éxito (Código 200), procesando el pedido y la creación del perfil del cliente de forma fluida y en milisegundos.
+      </p>
+
+      <hr />
+
+      <p data-i18n
+         data-lang-es="Con esta actualización en producción, la plataforma se encuentra operando al 100% de su capacidad comercial, resguardando el ingreso fluido de cada compra mayorista."
+         data-lang-zh="随着本次升级全面上线，平台商业模块的处理能力已达到 100% 最佳状态，完美保障每笔大额批发订单高效流入。">
+        Con esta actualización en producción, la plataforma se encuentra operando al 100% de su capacidad comercial, resguardando el ingreso fluido de cada compra mayorista.
+      </p>
+
+      <p data-i18n
+         data-lang-es="¡Segumos impulsando el crecimiento de tu plataforma!"
+         data-lang-zh="持续为您的业务增长保驾护航！">
+        ¡Seguimos impulsando el crecimiento de tu plataforma!
+      </p>
+
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const btn = document.getElementById("toggle-lang");
+      const indicator = document.getElementById("lang-indicator");
+      const nodes = Array.from(document.querySelectorAll("[data-i18n]"));
+
+      const LANG = {
+        ES: "es",
+        ZH: "zh",
+      };
+
+      let current = LANG.ES;
+
+      function applyLang(lang) {
+        current = lang;
+        document.documentElement.lang = (lang === LANG.ZH) ? "zh-Hans" : "es";
+
+        nodes.forEach(el => {
+          const key = (lang === LANG.ZH) ? "langZh" : "langEs";
+          const text = el.dataset[key];
+          if (typeof text === "string") {
+            el.textContent = text;
+          }
+        });
+
+        if (lang === LANG.ZH) {
+          indicator.textContent = "当前语言：中文";
+          btn.textContent = "Cambiar a Español";
+          btn.setAttribute("aria-pressed", "true");
+        } else {
+          indicator.textContent = "Idioma actual: Español";
+          btn.textContent = "Cambiar a 中文";
+          btn.setAttribute("aria-pressed", "false");
+        }
+      }
+
+      btn.addEventListener("click", () => {
+        applyLang(current === LANG.ES ? LANG.ZH : LANG.ES);
+      });
+
+      applyLang(current);
+    })();
+  </script>
+</body>
+</html>
